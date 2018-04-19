@@ -269,7 +269,9 @@ public class ManageServiceImpl implements ManageService {
             skuInfoMapper.insertSelective(skuInfo);
         }
 
-
+        Example example=new Example(SkuImage.class);
+        example.createCriteria().andEqualTo("skuId",skuInfo.getId());
+        skuImageMapper.deleteByExample(example);
         List<SkuImage> skuImageList = skuInfo.getSkuImageList();
         for (SkuImage skuImage : skuImageList) {
             skuImage.setSkuId(skuInfo.getId());
@@ -279,6 +281,9 @@ public class ManageServiceImpl implements ManageService {
             skuImageMapper.insertSelective(skuImage);
         }
 
+        Example skuAttrValueExample=new Example(SkuAttrValue.class);
+        skuAttrValueExample.createCriteria().andEqualTo("skuId",skuInfo.getId());
+        skuAttrValueMapper.deleteByExample(skuAttrValueExample);
         List<SkuAttrValue> skuAttrValueList = skuInfo.getSkuAttrValueList();
         for (SkuAttrValue skuAttrValue : skuAttrValueList) {
             skuAttrValue.setSkuId(skuInfo.getId());
@@ -288,6 +293,9 @@ public class ManageServiceImpl implements ManageService {
             skuAttrValueMapper.insertSelective(skuAttrValue);
         }
 
+        Example skuSaleAttrValueExample=new Example(SkuSaleAttrValue.class);
+        skuSaleAttrValueExample.createCriteria().andEqualTo("skuId",skuInfo.getId());
+        skuSaleAttrValueMapper.deleteByExample(skuSaleAttrValueExample);
         List<SkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
         for (SkuSaleAttrValue skuSaleAttrValue : skuSaleAttrValueList) {
             skuSaleAttrValue.setSkuId(skuInfo.getId());

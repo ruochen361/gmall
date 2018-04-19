@@ -3,15 +3,9 @@ package com.atguigu.gmall.manage.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.atguigu.gmall.bean.SkuImage;
-import com.atguigu.gmall.bean.SkuInfo;
-import com.atguigu.gmall.bean.SkuSaleAttrValue;
-import com.atguigu.gmall.bean.SpuSaleAttr;
+import com.atguigu.gmall.bean.*;
 import com.atguigu.gmall.constant.RedisConst;
-import com.atguigu.gmall.manage.mapper.SkuImageMapper;
-import com.atguigu.gmall.manage.mapper.SkuInfoMapper;
-import com.atguigu.gmall.manage.mapper.SkuSaleAttrValueMapper;
-import com.atguigu.gmall.manage.mapper.SpuSaleAttrMapper;
+import com.atguigu.gmall.manage.mapper.*;
 import com.atguigu.gmall.service.ManageSkuService;
 import com.atguigu.gmall.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +34,12 @@ public class ManageSkuServiceImpl implements ManageSkuService {
     SkuSaleAttrValueMapper skuSaleAttrValueMapper;
 
     @Autowired
+    SkuAttrValueMapper skuAttrValueMapper;
+
+    @Autowired
     RedisUtil redisUtil;
+
+
 
 
     @Override
@@ -108,9 +107,17 @@ public class ManageSkuServiceImpl implements ManageSkuService {
             SkuImage skuImage = new SkuImage();
             skuImage.setSkuId(skuId);
             List<SkuImage> skuImageList = skuImageMapper.select(skuImage);
-
             skuInfo.setSkuImageList(skuImageList);
 
+            SkuAttrValue skuAttrValue = new SkuAttrValue();
+            skuAttrValue.setSkuId(skuId);
+            List<SkuAttrValue> skuAttrValueList = skuAttrValueMapper.select(skuAttrValue);
+            skuInfo.setSkuAttrValueList(skuAttrValueList);
+
+            SkuSaleAttrValue skuSaleAttrValue = new SkuSaleAttrValue();
+            skuSaleAttrValue.setSkuId(skuId);
+            List<SkuSaleAttrValue> skuSaleAttrValueList = skuSaleAttrValueMapper.select(skuSaleAttrValue);
+            skuInfo.setSkuSaleAttrValueList(skuSaleAttrValueList);
         }
 
         return skuInfo;
@@ -130,5 +137,40 @@ public class ManageSkuServiceImpl implements ManageSkuService {
         List<SkuSaleAttrValue> skuSaleAttrValueListBySpu =
                 skuSaleAttrValueMapper.selectSkuSaleAttrValueBySpu(Long.parseLong(spuId));
         return skuSaleAttrValueListBySpu;
+    }
+
+
+    @Override
+    public List<SkuInfo> getSkuInfoListBySpu(String spuId) {
+        List<SkuInfo> skuInfoList = skuInfoMapper.selectSkuInfoBySpu(Long.parseLong(spuId));
+        /*SkuInfo skuInfo = new SkuInfo();
+        skuInfo.setSpuId(spuId);
+        List<SkuInfo> skuInfoList = skuInfoMapper.select(skuInfo);
+
+        for (SkuInfo info : skuInfoList) {
+            //图片
+            SkuImage skuImage = new SkuImage();
+            skuImage.setSkuId(info.getId());
+            List<SkuImage> skuImageList = skuImageMapper.select(skuImage);
+            info.setSkuImageList(skuImageList);
+
+            //平台属性
+            SkuAttrValue skuAttrValue = new SkuAttrValue();
+            skuAttrValue.setSkuId(info.getId());
+            List<SkuAttrValue> skuAttrValueList =
+                    skuAttrValueMapper.select(skuAttrValue);
+            info.setSkuAttrValueList(skuAttrValueList);
+
+            //销售属性
+            SkuSaleAttrValue skuSaleAttrValue = new SkuSaleAttrValue();
+            skuSaleAttrValue.setSkuId(info.getId());
+            List<SkuSaleAttrValue> skuSaleAttrValueList =
+                    skuSaleAttrValueMapper.select(skuSaleAttrValue);
+            info.setSkuSaleAttrValueList(skuSaleAttrValueList);
+
+        }*/
+
+
+        return skuInfoList;
     }
 }

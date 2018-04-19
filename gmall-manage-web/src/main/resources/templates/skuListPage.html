@@ -47,7 +47,27 @@
 <script type="text/javascript">
 
     function initSkuListDlg(spuRow,catalog3Id){
+        var spuId = spuRow.id;
+        $("#spuIdForSkuList").val(spuId);
+        $("#catalog3IdForSkuList").val(catalog3Id);
+        $("#skulist_dlg").dialog("open");
+        initSkuListDatagrid(spuId);
+    }
 
+    function initSkuListDatagrid(spuId) {
+        $("#skulist_dg").datagrid({url:"getSkuInfoListBySpu?spuId="+spuId});
+
+    }
+
+    function editSkuInfo() {
+
+        var skuInfo = $("#skulist_dg").datagrid('getSelected');
+        if (!skuInfo){
+            $.messager.alert("警告","请先选择sku","warning");
+        }
+        //var spuId = $("#spuIdForSkuList").val();
+        //var catalog3Id = $("#catalog3IdForSkuList").val();
+        initSkuInfoDlg(skuInfo);
     }
 </script>
 </html>
