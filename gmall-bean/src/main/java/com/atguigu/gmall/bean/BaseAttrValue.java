@@ -2,6 +2,7 @@ package com.atguigu.gmall.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -20,7 +21,18 @@ public class BaseAttrValue implements Serializable {
     @Column
     private String isEnabled;
 
+    @Transient//面包屑路径
+    private String urlParam;
+
     public BaseAttrValue() {
+    }
+
+    public String getUrlParam() {
+        return urlParam;
+    }
+
+    public void setUrlParam(String urlParam) {
+        this.urlParam = urlParam;
     }
 
     public String getId() {

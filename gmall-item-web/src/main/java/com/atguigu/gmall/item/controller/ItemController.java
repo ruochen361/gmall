@@ -2,9 +2,11 @@ package com.atguigu.gmall.item.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.atguigu.gmall.annotation.LoginRequire;
 import com.atguigu.gmall.bean.SkuInfo;
 import com.atguigu.gmall.bean.SkuSaleAttrValue;
 import com.atguigu.gmall.bean.SpuSaleAttr;
+import com.atguigu.gmall.service.ListService;
 import com.atguigu.gmall.service.ManageService;
 import com.atguigu.gmall.service.ManageSkuService;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,11 @@ public class ItemController {
     @Reference
     ManageSkuService manageSkuService;
 
+    @Reference
+    ListService listService;
+
     @RequestMapping("{skuId}.html")
+    @LoginRequire
     public String getSkuInfo(@PathVariable("skuId")String skuId, Model model){
 
        SkuInfo skuInfo = manageSkuService.getSkuInfo(skuId);
@@ -64,6 +70,8 @@ public class ItemController {
 
        model.addAttribute("saleValueSkuIdJSON",saleValueSkuIdJSON);
 
+       //增加点击热度评分，为查询列表排序
+       listService.incrHotScore(skuId);
 
        return "item";
     }

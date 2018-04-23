@@ -36,5 +36,6 @@ public interface ManageService {
 
     public void saveSkuInfo(SkuInfo skuInfo);
 
+    public List<BaseAttrInfo> getBaseAttrInfoList(List<String> attrValueIdList);
 
 }

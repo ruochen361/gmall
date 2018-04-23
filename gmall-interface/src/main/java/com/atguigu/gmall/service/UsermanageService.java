@@ -15,20 +15,23 @@ import java.util.List;
 public interface UsermanageService {
 
 
-        public List<UserInfo> getAllUserInfoList();
+    public List<UserInfo> getAllUserInfoList();
 
-        public  List<UserInfo> getUserInfoList(UserInfo userinfoQuery);
+    public List<UserInfo> getUserInfoList(UserInfo userinfoQuery);
 
-        public UserInfo getUserInfo(UserInfo userInfoQuery);
+    public UserInfo getUserInfo(UserInfo userInfoQuery);
 
-        public void  addUserInfo(UserInfo userInfo);
+    public void addUserInfo(UserInfo userInfo);
 
-        public void updateUserInfo(UserInfo userInfo);
+    public void updateUserInfo(UserInfo userInfo);
 
-        public  void  deleteUserInfo(UserInfo userInfo);
+    public void deleteUserInfo(UserInfo userInfo);
 
-        public int getCount(UserInfo userInfo);
+    public int getCount(UserInfo userInfo);
 
-        public  List<UserAddress> getUserAddressList(String userId);
+    public List<UserAddress> getUserAddressList(String userId);
 
+    public UserInfo login(UserInfo userInfo);
+
+    public UserInfo verify(String userId);
 }

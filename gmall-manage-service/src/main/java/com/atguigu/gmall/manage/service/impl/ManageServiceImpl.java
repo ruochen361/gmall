@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.atguigu.gmall.bean.*;
 import com.atguigu.gmall.manage.mapper.*;
 import com.atguigu.gmall.service.ManageService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
@@ -99,6 +100,13 @@ public class ManageServiceImpl implements ManageService {
             List<BaseAttrValue> baseAttrValueList = baseAttrValueMapper.select(baseAttrValue);
             attrInfo.setAttrValueList(baseAttrValueList);
         }
+        return baseAttrInfoList;
+    }
+
+    @Override
+    public List<BaseAttrInfo> getBaseAttrInfoList(List<String> attrValueIdList) {
+        String attrValueIds = StringUtils.join(attrValueIdList,",");
+        List<BaseAttrInfo> baseAttrInfoList=baseAttrInfoMapper.selectBaseAttrInfoList(attrValueIds);
         return baseAttrInfoList;
     }
 

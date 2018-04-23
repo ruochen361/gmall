@@ -13,4 +13,6 @@ public interface ManageSkuService {
     public List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(String id, String spuId);
 
     public List<SkuSaleAttrValue> getSkuSaleAttrValueBySpu(String spuId);
+
+    public List<SkuInfo> getSkuInfoListBySpu(String spuId);
 }

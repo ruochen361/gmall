@@ -75,7 +75,7 @@ public class SkuManageController {
     @ResponseBody
     //sku上架，skuinfo保存至elasticsearch
     public void onSale(SkuInfo skuInfo){
-       // SkuInfo skuInfo = manageSkuService.getSkuInfo(skuId);
+        //SkuInfo skuInfo = manageSkuService.getSkuInfo(skuId);
         SkuLsInfo skuLsInfo = new SkuLsInfo();
 
         try {
