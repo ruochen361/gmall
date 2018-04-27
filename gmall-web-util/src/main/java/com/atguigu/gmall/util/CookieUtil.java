@@ -1,5 +1,7 @@
 package com.atguigu.gmall.util;
 
+import org.springframework.stereotype.Component;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import java.net.URLEncoder;
  * User: ruochen
  * Date:2018/4/22 0022
  */
+@Component
 public class CookieUtil {
     public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
         Cookie[] cookies = request.getCookies();
@@ -52,6 +55,10 @@ public class CookieUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String cookieName) {
+        setCookie(request, response, cookieName, null, 0, false);
     }
     /**
      * 得到cookie的域名
